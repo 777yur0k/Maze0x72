@@ -18509,11 +18509,11 @@ PrefabInstance:
     - target: {fileID: 8917574056738172675, guid: d4d24de9fadf4074ba11894ee7982cac, type: 3}
       propertyPath: 'hearts.Array.data[1]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1859131608}
     - target: {fileID: 8917574056738172675, guid: d4d24de9fadf4074ba11894ee7982cac, type: 3}
       propertyPath: 'hearts.Array.data[2]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 260387287}
     - target: {fileID: 8917574056738172676, guid: d4d24de9fadf4074ba11894ee7982cac, type: 3}
       propertyPath: m_RootOrder
       value: 1
