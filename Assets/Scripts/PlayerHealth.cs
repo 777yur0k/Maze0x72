@@ -57,7 +57,7 @@ public class PlayerHealth : MonoBehaviour
         yield return new WaitForSeconds(1f);
         transform.Rotate(0, 0, 90);
         yield return new WaitForSeconds(1f);
-        SceneLoader.LoadLoseScene();
+        Camera.main.GetComponent<SetPanels>().SetPanel("Lose");
         enabled = false;
     }
 }
