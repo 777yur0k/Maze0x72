@@ -21,9 +21,9 @@ public class PlayerHealth : MonoBehaviour
 
     void Update()
     {
-      for (int i = 0; i < hearts.Length; i++)
-        if (i >= health) hearts[i].enabled = false;
-        else hearts[i].enabled = true;
+        for (int i = 0; i < hearts.Length; i++)
+            if (i >= health) hearts[i].enabled = false;
+            else hearts[i].enabled = true;
     }
 
     public void processHit()
