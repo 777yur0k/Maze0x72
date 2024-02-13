@@ -3,116 +3,106 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
-  [SerializeField] Transform[] patrolPoints;
-  [SerializeField] float speed = 5f;
-  
-  BlinkBehaviour blinkBehaviour;
-  Rigidbody2D rbody;
-  BoxCollider2D boxCollider;
-  SpriteRenderer spriteRenderer;
-  Vector2 moveTo;
+    [SerializeField] Transform[] patrolPoints;
+    [SerializeField] float speed = 5f;
+    BlinkBehaviour blinkBehaviour;
+    Rigidbody2D rbody;
+    BoxCollider2D boxCollider;
+    SpriteRenderer spriteRenderer;
+    Vector2 moveTo;
+    int pointsSize, currentPointIndex;
+    bool isMovingForward = true, canMove = true, calledChangeIndex;
 
-  int pointsSize;
-  int currentPointIndex = 0;
+    void Start()
+    {
+        rbody = GetComponent<Rigidbody2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        blinkBehaviour = GetComponent<BlinkBehaviour>();
+        pointsSize = patrolPoints.Length;
+        transform.position = patrolPoints[currentPointIndex].position;
+        if (pointsSize > 1) currentPointIndex++;
+  }
 
-  bool isMovingForward = true;
+    void verifyFlip()
+    {
+        float actualX = transform.position.x;
+        float patrolX = patrolPoints[currentPointIndex].position.x;
 
-  bool canMove = true;
-
-  bool calledChangeIndex = false;
-
-  void Start()
-  {
-    rbody = GetComponent<Rigidbody2D>();
-    boxCollider = GetComponent<BoxCollider2D>();
-    spriteRenderer = GetComponent<SpriteRenderer>();
-
-    blinkBehaviour = GetComponent<BlinkBehaviour>();
-
-    pointsSize = patrolPoints.Length;
-
-    transform.position = patrolPoints[currentPointIndex].position;
-    if (pointsSize > 1) {
-      currentPointIndex++;
+        if (patrolX > actualX) spriteRenderer.flipX = true;
+        else if (patrolX < actualX) spriteRenderer.flipX = false;
     }
-  }
 
-  void verifyFlip () {
-    float actualX = transform.position.x;
-    float patrolX = patrolPoints[currentPointIndex].position.x;
-
-    if (patrolX > actualX) {
-      spriteRenderer.flipX = true;
-    } else if (patrolX < actualX) {
-      spriteRenderer.flipX = false;
+    void verifyIndex()
+    {
+        if (transform.position == patrolPoints[currentPointIndex].position && !calledChangeIndex)
+        {
+            calledChangeIndex = true;
+            StartCoroutine(changePointIndex());
+        }
     }
-  }
 
-  void verifyIndex () {
-    if (transform.position == patrolPoints[currentPointIndex].position && !calledChangeIndex) {
-      calledChangeIndex = true;
-      StartCoroutine(changePointIndex());
+    IEnumerator changePointIndex()
+    {
+        yield return new WaitForSeconds(0.5f); 
+        changeIndex();
     }
-  }
 
-  IEnumerator changePointIndex () {
-    yield return new WaitForSeconds(0.5f); 
-    changeIndex();
-  }
-
-  void Update()
-  {
-    verifyFlip();
-    verifyIndex();
-  }
-
-  void calculateAndMove () {
-    if (canMove) {
-      Vector2 moveAmount = Vector2.MoveTowards(rbody.position, patrolPoints[currentPointIndex].position, speed * Time.fixedDeltaTime);
-      rbody.MovePosition(moveAmount);  
+    void Update()
+    {
+        verifyFlip();
+        verifyIndex();
     }
-  }
-  
-  void FixedUpdate() {
-    calculateAndMove();   
-  }
 
-  void changeIndex () {
-    if (isMovingForward && currentPointIndex + 1 < pointsSize) {
-      currentPointIndex++;
-    } else if (isMovingForward && currentPointIndex + 1 >= pointsSize) {
-      currentPointIndex--;
-      isMovingForward = false;
-    } else if (!isMovingForward && currentPointIndex - 1 >= 0) {
-      currentPointIndex--;
-    } else if (!isMovingForward && currentPointIndex - 1 < 0) {
-      currentPointIndex++;
-      isMovingForward = true;
+    void calculateAndMove()
+    {
+        if (canMove)
+        {
+            Vector2 moveAmount = Vector2.MoveTowards(rbody.position, patrolPoints[currentPointIndex].position, speed * Time.fixedDeltaTime);
+            rbody.MovePosition(moveAmount);  
+        }
     }
-    calledChangeIndex = false;
-  }
 
-  private void OnTriggerEnter2D(Collider2D other) {
-    if (other.tag == "Player") {
-      other.GetComponent<PlayerHealth>().processHit();
+    void FixedUpdate() => calculateAndMove();
+
+    void changeIndex()
+    {
+        if (isMovingForward && currentPointIndex + 1 < pointsSize) currentPointIndex++;
+        
+        else if (isMovingForward && currentPointIndex + 1 >= pointsSize)
+        {
+            currentPointIndex--;
+            isMovingForward = false;
+        }
+        
+        else if (!isMovingForward && currentPointIndex - 1 >= 0) currentPointIndex--;
+        
+        else if (!isMovingForward && currentPointIndex - 1 < 0)
+        {
+            currentPointIndex++;
+            isMovingForward = true;
+        }
+        
+        calledChangeIndex = false;
     }
-  }
 
-  public void GetHit () {
-    canMove = false;
-    blinkBehaviour.Blink(0.125f);
-  
-    StartCoroutine(Die());
-  }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Player") other.GetComponent<PlayerHealth>().processHit();
+    }
 
-  IEnumerator Die () {
-    boxCollider.enabled = false;
+    public void GetHit()
+    {
+        canMove = false;
+        blinkBehaviour.Blink(0.125f);
+        StartCoroutine(Die());
+    }
 
-    yield return new WaitForSeconds(0.5f);
-
-    transform.Rotate(0, 0, 90);
-
-    this.enabled = false;
-  }
-
+    IEnumerator Die()
+    {
+        boxCollider.enabled = false;
+        yield return new WaitForSeconds(0.5f);
+        transform.Rotate(0, 0, 90);
+        enabled = false;
+    }
 }

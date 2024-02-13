@@ -2,18 +2,11 @@ using UnityEngine;
 
 public class SignBehaviour : MonoBehaviour
 {
-  DialogueTrigger dialogueTrigger;
+    DialogueTrigger dialogueTrigger;
 
-  void Start()
-  {
-    dialogueTrigger = GetComponent<DialogueTrigger>();
-  }
+    void Start() => dialogueTrigger = GetComponent<DialogueTrigger>();
 
-  private void OnTriggerEnter2D(Collider2D other) {
-    dialogueTrigger.TriggerDialogue();
-  }
+    void OnTriggerEnter2D(Collider2D other) => dialogueTrigger.TriggerDialogue();
 
-  private void OnTriggerExit2D(Collider2D other) {
-    dialogueTrigger.CloseDialog();
-  }
+    void OnTriggerExit2D(Collider2D other) => dialogueTrigger.CloseDialog();
 }
