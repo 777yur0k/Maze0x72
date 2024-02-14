@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SetPanels : MonoBehaviour
@@ -5,11 +6,12 @@ public class SetPanels : MonoBehaviour
     [Header("Debug:")]
     public bool EnableDebug;
     string ActivePanel = "MainMenu", OldPanel;
-    public GameObject Panels;
+    public GameObject Panel;
+    public List<GameObject> Panels;
 
     public void SetPanel(string NewPanel)
     {
-        Panels.SetActive(true);
+        Panel.SetActive(true);
 
         OldPanel = ActivePanel;
         ActivePanel = NewPanel;
@@ -32,14 +34,15 @@ public class SetPanels : MonoBehaviour
         else ClosePanel();
     }
 
+    public GameObject GetPanel(string Name) => Panels[GetIDPanel(Name)];
+
     int GetIDPanel(string Name)
     {
-        for (var i = 0; i < Panels.transform.childCount; i++) if (Name == Panels.transform.GetChild(i).name) return i;
-        Debug.LogError("Error name of Panel");
-        return 0;
-    }
+        for (var i = 0; i < Panels.Count; i++) if (Name == Panels[i].name) return i;
 
-    public GameObject GetPanel(string Name) => Panels.transform.GetChild(GetIDPanel(Name)).gameObject;
+        Debug.LogError("Error name of Panel");
+        return -1;
+    }
 
     public void BackPanel() => SetPanel(OldPanel);
 
