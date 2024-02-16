@@ -15,15 +15,5 @@ public class CameraMotor : MonoBehaviour
         else return delta + bound;
     }
 
-    void LateUpdate()
-    {
-        Vector3 delta;
-        delta.x = getDelta(lookAt.position.x, transform.position.x, boundX);
-        delta.y = getDelta(lookAt.position.y, transform.position.y, boundY);
-
-        float newX = Mathf.Clamp(transform.position.x + delta.x, bottomBoundX, topBoundX);
-        float newY = Mathf.Clamp(transform.position.y + delta.y, bottomBoundY, topBoundY);
-
-        transform.position = new Vector3(newX, newY, -10);
-    }
+    void LateUpdate() => transform.position = new Vector3(Mathf.Clamp(transform.position.x + getDelta(lookAt.position.x, transform.position.x, boundX), bottomBoundX, topBoundX), Mathf.Clamp(transform.position.y + getDelta(lookAt.position.y, transform.position.y, boundY), bottomBoundY, topBoundY), -10);
 }
