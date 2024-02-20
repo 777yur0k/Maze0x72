@@ -12087,6 +12087,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 778667338}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1125896315 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8917574056738172729, guid: d4d24de9fadf4074ba11894ee7982cac, type: 3}
+  m_PrefabInstance: {fileID: 8917574055276473639}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1134624039
 GameObject:
   m_ObjectHideFlags: 0
@@ -14757,6 +14762,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8917574056738172676, guid: d4d24de9fadf4074ba11894ee7982cac, type: 3}
   m_PrefabInstance: {fileID: 8917574055276473639}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1759527466
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125896315}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: dbbd9c53d38248d44a69b19d1d754c8c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1759748260
 GameObject:
   m_ObjectHideFlags: 0
@@ -26149,9 +26176,25 @@ PrefabInstance:
     m_TransformParent: {fileID: 229641206}
     m_Modifications:
     - target: {fileID: 8917574056738172675, guid: d4d24de9fadf4074ba11894ee7982cac, type: 3}
+      propertyPath: Hearts.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917574056738172675, guid: d4d24de9fadf4074ba11894ee7982cac, type: 3}
       propertyPath: hearts.Array.size
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8917574056738172675, guid: d4d24de9fadf4074ba11894ee7982cac, type: 3}
+      propertyPath: 'Hearts.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1134624039}
+    - target: {fileID: 8917574056738172675, guid: d4d24de9fadf4074ba11894ee7982cac, type: 3}
+      propertyPath: 'Hearts.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1859131606}
+    - target: {fileID: 8917574056738172675, guid: d4d24de9fadf4074ba11894ee7982cac, type: 3}
+      propertyPath: 'Hearts.Array.data[2]'
+      value: 
+      objectReference: {fileID: 260387285}
     - target: {fileID: 8917574056738172675, guid: d4d24de9fadf4074ba11894ee7982cac, type: 3}
       propertyPath: 'hearts.Array.data[0]'
       value: 
@@ -26218,7 +26261,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8917574056738172676, guid: d4d24de9fadf4074ba11894ee7982cac, type: 3}
       insertIndex: -1
       addedObject: {fileID: 601780653}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8917574056738172729, guid: d4d24de9fadf4074ba11894ee7982cac, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1759527466}
   m_SourcePrefab: {fileID: 100100000, guid: d4d24de9fadf4074ba11894ee7982cac, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

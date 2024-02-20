@@ -1,63 +1,45 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
+using MyLibrary;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] int health = 3;
-    BlinkBehaviour blinkBehaviour;
-    PlayerController controller;
-    Weapon weaponController;
-    SpriteRenderer spriteRenderer;
-    [SerializeField] Image[] hearts;
+    Character Character = new();
+    public PlayerController controller;
+    public Weapon weaponController;
+    public GameObject[] Hearts;
 
-    void Start()
+    void HeartsUpdate()
     {
-        blinkBehaviour = GetComponent<BlinkBehaviour>();
-        controller = GetComponent<PlayerController>();
-        weaponController = GetComponentInChildren<Weapon>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
-    void Update()
-    {
-        for (int i = 0; i < hearts.Length; i++)
-            if (i >= health) hearts[i].enabled = false;
-            else hearts[i].enabled = true;
+        for (var i = 0; i < Character.MaxHealth - Character.Health; i++) Hearts[i].SetActive(false);
     }
 
     public void processHit()
     {
-        blinkBehaviour.Blink(0.125f);
-        health -= 1;
+        GetComponent<BlinkBehaviour>().Blink(0.125f);
 
-        controller.enabled = false;
-        weaponController.enabled = false;
-
-        if (health <= 0)
-        {
-            spriteRenderer.sortingOrder = -1; // Para que os inimigos "passem por cima"
-            weaponController.GetComponentInChildren<SpriteRenderer>().sortingOrder = -1; // Para que os inimigos "passem por cima"
-            StartCoroutine(dieAnimation());
-            return;
+        if (Character.Health > 0)
+        { 
+            Character.Health -= 1;
+            HeartsUpdate();
         }
 
-        StartCoroutine(enableColliderAndController());
+        ChaneColliderState();
+
+        if (Character.Health <= 0)
+        {
+            GetComponent<SpriteRenderer>().sortingOrder = -1; // Para que os inimigos "passem por cima"
+            weaponController.GetComponentInChildren<SpriteRenderer>().sortingOrder = -1; // Para que os inimigos "passem por cima"
+            GetComponent<Animator>().SetBool("Die", true);
+        }
+
+        else Invoke(nameof(ChaneColliderState), 0.25f);
     }
 
-    IEnumerator enableColliderAndController()
+    void ChaneColliderState()
     {
-        yield return new WaitForSeconds(0.25f);
-        controller.enabled = true;
-        weaponController.enabled = true;
+        controller.enabled = !controller.enabled;
+        weaponController.enabled = !weaponController.enabled;
     }
 
-    IEnumerator dieAnimation()
-    {
-        yield return new WaitForSeconds(1f);
-        transform.Rotate(0, 0, 90);
-        yield return new WaitForSeconds(1f);
-        Camera.main.GetComponent<SetPanels>().SetPanel("Lose");
-        enabled = false;
-    }
+    public void DieAnimation() => Camera.main.GetComponent<SetPanels>().SetPanel("Lose");
 }
