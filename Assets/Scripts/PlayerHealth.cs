@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour
     public PlayerController controller;
     public Weapon weaponController;
     public GameObject[] Hearts;
+    bool damaged;
 
     void HeartsUpdate()
     {
@@ -15,6 +16,9 @@ public class PlayerHealth : MonoBehaviour
 
     public void processHit()
     {
+        if (damaged) return;
+
+        damaged = true;
         GetComponent<BlinkBehaviour>().Blink(0.125f);
 
         if (Character.Health > 0)
@@ -23,7 +27,8 @@ public class PlayerHealth : MonoBehaviour
             HeartsUpdate();
         }
 
-        ChaneColliderState();
+        controller.enabled = false;
+        weaponController.enabled = false;
 
         if (Character.Health <= 0)
         {
@@ -32,13 +37,14 @@ public class PlayerHealth : MonoBehaviour
             GetComponent<Animator>().SetBool("Die", true);
         }
 
-        else Invoke(nameof(ChaneColliderState), 0.25f);
+        else Invoke(nameof(ChaneColliderState), 0.5f);
     }
 
     void ChaneColliderState()
     {
-        controller.enabled = !controller.enabled;
-        weaponController.enabled = !weaponController.enabled;
+        controller.enabled = true;
+        weaponController.enabled = true;
+        damaged = false;
     }
 
     public void DieAnimation() => Camera.main.GetComponent<SetPanels>().SetPanel("Lose");
