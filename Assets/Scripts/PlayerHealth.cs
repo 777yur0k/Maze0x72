@@ -11,7 +11,8 @@ public class PlayerHealth : MonoBehaviour
 
     void HeartsUpdate()
     {
-        for (var i = 0; i < Character.MaxHealth - Character.Health; i++) Hearts[i].SetActive(false);
+        for (var i = 0; i < Hearts.Length; i++) Hearts[i].SetActive(false);
+        for (var i = 0; i < Character.Health; i++) Hearts[i].SetActive(true);
     }
 
     public void processHit()
