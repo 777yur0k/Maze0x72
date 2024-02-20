@@ -48,5 +48,9 @@ public class PlayerHealth : MonoBehaviour
         damaged = false;
     }
 
-    public void DieAnimation() => Camera.main.GetComponent<SetPanels>().SetPanel("Lose");
+    public void DieAnimation()
+    {
+        Camera.main.GetComponent<SetPanels>().SetPanel("Lose");
+        damaged = false;
+    }
 }
