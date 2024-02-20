@@ -31,12 +31,7 @@ public class PlayerHealth : MonoBehaviour
         controller.enabled = false;
         weaponController.enabled = false;
 
-        if (Character.Health <= 0)
-        {
-            GetComponent<SpriteRenderer>().sortingOrder = -1; // Para que os inimigos "passem por cima"
-            weaponController.GetComponentInChildren<SpriteRenderer>().sortingOrder = -1; // Para que os inimigos "passem por cima"
-            GetComponent<Animator>().SetBool("Die", true);
-        }
+        if (Character.Health <= 0) GetComponent<Animator>().SetBool("Die", true);
 
         else Invoke(nameof(ChaneColliderState), 0.5f);
     }
