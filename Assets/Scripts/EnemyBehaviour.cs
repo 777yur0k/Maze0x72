@@ -79,7 +79,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player")) other.GetComponent<PlayerHealth>().processHit();
+        if (other.CompareTag("Player")) other.GetComponent<PlayerHealth>().ProcessHit();
     }
 
     public void GetHit()

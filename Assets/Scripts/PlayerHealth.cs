@@ -15,7 +15,7 @@ public class PlayerHealth : MonoBehaviour
         for (var i = 0; i < Character.Health; i++) Hearts[i].SetActive(true);
     }
 
-    public void processHit()
+    public void ProcessHit()
     {
         if (damaged) return;
 
