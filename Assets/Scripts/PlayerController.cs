@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer spriteRenderer;
     [SerializeField] float speed = 5f;
     Vector2 moveDelta;
-    GameObject attack, sword;
+    public GameObject attack, sword;
     Vector3 attackPosition = new(0.6f, 0.0f, 0.0f), attackFlippedPosition = new(-0.6f, 0.0f, 0.0f), swordPosition = new(0.3f, 0.1f, 0.0f), swordFlippedPosition = new(-0.3f, 0.1f, 0.0f);
     [SerializeField] bool startFlipped;
 
@@ -14,8 +14,6 @@ public class PlayerController : MonoBehaviour
     {
         rbody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        attack = transform.GetChild(0).gameObject;
-        sword = transform.GetChild(1).gameObject;
 
         if (startFlipped) setFlipped();
         else setUnflipped();
