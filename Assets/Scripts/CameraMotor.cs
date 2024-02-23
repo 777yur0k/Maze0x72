@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CameraMotor : MonoBehaviour
 {
-    [SerializeField] Transform lookAt;
+    public Transform lookAt;
     [SerializeField] float topBoundY = 10, bottomBoundY = -10, topBoundX = 5, bottomBoundX = -5, boundX = 0.15f, boundY = 0.05f;
 
     float getDelta(float lookAtPos, float transformPos, float bound)
@@ -15,5 +15,8 @@ public class CameraMotor : MonoBehaviour
         else return delta + bound;
     }
 
-    void LateUpdate() => transform.position = new Vector3(Mathf.Clamp(transform.position.x + getDelta(lookAt.position.x, transform.position.x, boundX), bottomBoundX, topBoundX), Mathf.Clamp(transform.position.y + getDelta(lookAt.position.y, transform.position.y, boundY), bottomBoundY, topBoundY), -10);
+    void LateUpdate()
+    {
+        if(lookAt != null) transform.position = new Vector3(Mathf.Clamp(transform.position.x + getDelta(lookAt.position.x, transform.position.x, boundX), bottomBoundX, topBoundX), Mathf.Clamp(transform.position.y + getDelta(lookAt.position.y, transform.position.y, boundY), bottomBoundY, topBoundY), -10);
+    }
 }

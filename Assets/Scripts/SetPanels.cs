@@ -8,6 +8,7 @@ public class SetPanels : MonoBehaviour
     string ActivePanel = "MainMenu", OldPanel;
     public GameObject Panel;
     public List<GameObject> Panels;
+    public GameObject Player;
 
     public void SetPanel(string NewPanel)
     {
@@ -50,5 +51,12 @@ public class SetPanels : MonoBehaviour
     {
         GetPanel(ActivePanel).SetActive(false);
         ActivePanel = "";
+    }
+
+    public void PlayerSpawn()
+    {
+        var player = Instantiate(Player, GetPanel(ActivePanel).transform.Find("PlayerSpawn"));
+        Camera.main.GetComponent<CameraMotor>().lookAt = player.transform;
+        Camera.main.GetComponent<GameManager>().PlayerController = player.GetComponent<PlayerController>();
     }
 }

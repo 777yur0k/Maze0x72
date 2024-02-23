@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public GameObject attack, sword;
     Vector3 attackPosition = new(0.6f, 0.0f, 0.0f), attackFlippedPosition = new(-0.6f, 0.0f, 0.0f), swordPosition = new(0.3f, 0.1f, 0.0f), swordFlippedPosition = new(-0.3f, 0.1f, 0.0f);
     [SerializeField] bool startFlipped;
+    public GameObject Key;
 
     void Start()
     {
@@ -24,6 +25,8 @@ public class PlayerController : MonoBehaviour
         calculateMove();
         verifyFlip();
     }
+
+    public void ShowKey() => Key.SetActive(true);
 
     void calculateMove()
     {
