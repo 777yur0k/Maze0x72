@@ -7,7 +7,7 @@ public class KeyBehaviour : MonoBehaviour
     void Start()
     {
         locations = GetComponentsInChildren<Transform>();
-        int index = Random.Range(0, locations.Length);
+        var index = Random.Range(0, locations.Length);
         transform.position = locations[index].position;  
     }
 
