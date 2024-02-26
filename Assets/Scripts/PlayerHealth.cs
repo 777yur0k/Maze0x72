@@ -20,7 +20,7 @@ public class PlayerHealth : MonoBehaviour
         if (damaged) return;
 
         damaged = true;
-        GetComponent<BlinkBehaviour>().Blink(0.125f);
+        GetComponent<Animator>().SetBool("Blink", true);
 
         if (Character.Health > 0)
         { 

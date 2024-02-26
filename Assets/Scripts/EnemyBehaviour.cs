@@ -84,16 +84,9 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void GetHit()
     {
-        canMove = false;
-        GetComponent<BlinkBehaviour>().Blink(0.125f);
-        StartCoroutine(Die());
-    }
-
-    IEnumerator Die()
-    {
         GetComponent<BoxCollider2D>().enabled = false;
-        yield return new WaitForSeconds(0.5f);
-        transform.Rotate(0, 0, 90);
         enabled = false;
+        GetComponent<Animator>().SetBool("Blink", true);
+        GetComponent<Animator>().SetBool("Die", true);
     }
 }
