@@ -34,7 +34,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.2d.psdimporter": {
-      "version": "9.0.2",
+      "version": "9.0.3",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -50,7 +50,7 @@
       "dependencies": {}
     },
     "com.unity.2d.spriteshape": {
-      "version": "10.0.3",
+      "version": "10.0.4",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -79,7 +79,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.burst": {
-      "version": "1.8.12",
+      "version": "1.8.13",
       "depth": 2,
       "source": "registry",
       "dependencies": {
