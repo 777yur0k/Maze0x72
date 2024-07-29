@@ -2,27 +2,17 @@ using UnityEngine;
 
 public class DoorBehaviour : MonoBehaviour
 {
-    public SceneLoader.SceneIndex nextScene = SceneLoader.SceneIndex.Win;
-    SpriteRenderer spriteRenderer;
-    BoxCollider2D boxCollider;
     [SerializeField] Sprite openSprite;
-
-    void Start()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();  
-        boxCollider = GetComponent<BoxCollider2D>();  
-    }
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Player" && GameManager.instance.hasKey)
+        if (other.gameObject.CompareTag("Player") && GameData.Character.Key)
         {
-            spriteRenderer.sprite = openSprite;
+            GetComponent<SpriteRenderer>().sprite = openSprite;
             GameManager.instance.PlayerWin();
-            Physics2D.IgnoreCollision(boxCollider, other.collider, true);
-            Invoke("callRestartScene", 0.5f);
+            Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), other.collider, true);
+            Camera.main.GetComponent<SetPanels>().SetPanel("Win");
+            Camera.main.GetComponent<SetPanels>().DestroyLevel();
         }
     }
-
-    void callRestartScene() => SceneLoader.LoadScene(nextScene);
 }

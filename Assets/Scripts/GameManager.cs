@@ -1,12 +1,10 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance { get; private set; }
-    public bool hasKey { get; private set; } = false;
     public static bool hasWon { get; private set; } = false;
-    [SerializeField] Image UIKey;
+    public PlayerController PlayerController;
 
     void Awake()
     {
@@ -21,8 +19,8 @@ public class GameManager : MonoBehaviour
 
     public void GotKey()
     {
-        hasKey = true;
-        UIKey.enabled = true;
+        GameData.Character.Key = true;
+        PlayerController.ShowKey();
     }
 
     public void PlayerWin() => hasWon = true;

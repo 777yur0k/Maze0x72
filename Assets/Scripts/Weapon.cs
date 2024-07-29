@@ -2,31 +2,16 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    Animator animator;
-    [SerializeField] Transform attackPos;
-    [SerializeField] float attackRangeX = 1f, attackRangeY = 1f, cooldown = 0.5f;
-    float lastSwing = 0;
-    bool isFlipped = true;
-
-    void Start() => animator = GetComponent<Animator>();
+    public Transform attackPos;
+    public float attackRangeX = 1f, attackRangeY = 1f, cooldown = 0.5f;
+    float lastSwing;
 
     void Update()
     {
-        if (Time.time - lastSwing < cooldown) return;
-
-        if (Input.GetAxisRaw("Fire1") > 0) Attack();
+        if (Input.GetAxisRaw("Fire1") > 0 && Time.time - lastSwing > cooldown) Attack();
     }
 
-    void SetAttackTrigger()
-    {
-        if (isFlipped)
-        {
-            animator.SetTrigger("FlippedSwingTrigger");
-            return;
-        }
-
-        animator.SetTrigger("SwingTrigger");
-    }
+    void SetAttackTrigger() => GetComponent<Animator>().SetTrigger("Attack");
 
     void Attack()
     {
@@ -36,11 +21,9 @@ public class Weapon : MonoBehaviour
         for (int i = 0; i < enemiesHit.Length; i++) enemiesHit[i].GetComponent<EnemyBehaviour>().GetHit();
     }
 
-    public void setFlipped(bool flippedValue) => isFlipped = flippedValue;
-
     void OnDrawGizmosSelected()
     {
-      Gizmos.color = Color.red;
-      Gizmos.DrawWireCube(attackPos.position, new Vector3(attackRangeX, attackRangeY));
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(attackPos.position, new Vector3(attackRangeX, attackRangeY));
     }
 }
