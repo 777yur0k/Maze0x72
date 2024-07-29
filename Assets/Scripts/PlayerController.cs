@@ -6,54 +6,31 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer spriteRenderer;
     [SerializeField] float speed = 5f;
     Vector2 moveDelta;
-    GameObject attack, sword;
-    Vector3 attackPosition = new(0.6f, 0.0f, 0.0f), attackFlippedPosition = new(-0.6f, 0.0f, 0.0f), swordPosition = new(0.3f, 0.1f, 0.0f), swordFlippedPosition = new(-0.3f, 0.1f, 0.0f);
+    public GameObject attack, sword;
     [SerializeField] bool startFlipped;
+    public GameObject Key;
 
     void Start()
     {
         rbody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        attack = transform.GetChild(0).gameObject;
-        sword = transform.GetChild(1).gameObject;
-
-        if (startFlipped) setFlipped();
-        else setUnflipped();
     }
 
     void Update()
     {
-        calculateMove();
-        verifyFlip();
+        CalculateMove();
     }
 
-    void calculateMove()
+    public void ShowKey() => Key.SetActive(true);
+
+    void CalculateMove()
     {
         moveDelta.x = Input.GetAxisRaw("Horizontal");
         moveDelta.y = Input.GetAxisRaw("Vertical");
-    }
 
-    void setFlipped()
-    {
-        spriteRenderer.flipX = true;
-        attack.transform.localPosition = attackFlippedPosition;
-        sword.transform.localPosition = swordFlippedPosition;
-        sword.GetComponent<Weapon>().setFlipped(true);
+        if (moveDelta.x < 0) transform.localScale = new(1,1,1);
+        else if (moveDelta.x > 0) transform.localScale = new(-1, 1, 1);
     }
-
-    void setUnflipped()
-    {
-        spriteRenderer.flipX = false;
-        attack.transform.localPosition = attackPosition;
-        sword.transform.localPosition = swordPosition;
-        sword.GetComponent<Weapon>().setFlipped(false);
-    }
-
-    void verifyFlip()
-    {
-        if (moveDelta.x < 0) setFlipped();
-        else if (moveDelta.x > 0) setUnflipped();
-    }
-
+    
     void FixedUpdate() => rbody.MovePosition(rbody.position + (moveDelta.normalized * speed * Time.fixedDeltaTime));
 }

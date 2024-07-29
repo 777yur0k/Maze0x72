@@ -1,63 +1,52 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
+using MyLibrary;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] int health = 3;
-    BlinkBehaviour blinkBehaviour;
-    PlayerController controller;
-    Weapon weaponController;
-    SpriteRenderer spriteRenderer;
-    [SerializeField] Image[] hearts;
+    public Character Character = new();
+    public PlayerController controller;
+    public Weapon weaponController;
+    public GameObject[] Hearts;
+    bool damaged;
 
-    void Start()
+    void HeartsUpdate()
     {
-        blinkBehaviour = GetComponent<BlinkBehaviour>();
-        controller = GetComponent<PlayerController>();
-        weaponController = GetComponentInChildren<Weapon>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        for (var i = 0; i < Hearts.Length; i++) Hearts[i].SetActive(false);
+        for (var i = 0; i < Character.Health; i++) Hearts[i].SetActive(true);
     }
 
-    void Update()
+    public void ProcessHit()
     {
-        for (int i = 0; i < hearts.Length; i++)
-            if (i >= health) hearts[i].enabled = false;
-            else hearts[i].enabled = true;
-    }
+        if (damaged) return;
 
-    public void processHit()
-    {
-        blinkBehaviour.Blink(0.125f);
-        health -= 1;
+        damaged = true;
+        GetComponent<Animator>().SetBool("Blink", true);
+
+        if (Character.Health > 0)
+        { 
+            Character.Health -= 1;
+            HeartsUpdate();
+        }
 
         controller.enabled = false;
         weaponController.enabled = false;
 
-        if (health <= 0)
-        {
-            spriteRenderer.sortingOrder = -1; // Para que os inimigos "passem por cima"
-            weaponController.GetComponentInChildren<SpriteRenderer>().sortingOrder = -1; // Para que os inimigos "passem por cima"
-            StartCoroutine(dieAnimation());
-            return;
-        }
+        if (Character.Health <= 0) GetComponent<Animator>().SetBool("Die", true);
 
-        StartCoroutine(enableColliderAndController());
+        else Invoke(nameof(ChangeColliderState), 0.5f);
     }
 
-    IEnumerator enableColliderAndController()
+    void ChangeColliderState()
     {
-        yield return new WaitForSeconds(0.25f);
         controller.enabled = true;
         weaponController.enabled = true;
+        damaged = false;
     }
 
-    IEnumerator dieAnimation()
+    public void DieAnimation()
     {
-        yield return new WaitForSeconds(1f);
-        transform.Rotate(0, 0, 90);
-        yield return new WaitForSeconds(1f);
-        SceneLoader.LoadLoseScene();
-        enabled = false;
+        Camera.main.GetComponent<SetPanels>().SetPanel("Lose");
+        Camera.main.GetComponent<SetPanels>().DestroyLevel();
+        damaged = false;
     }
 }

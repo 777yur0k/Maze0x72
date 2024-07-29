@@ -5,32 +5,23 @@ public class EnemyBehaviour : MonoBehaviour
 {
     [SerializeField] Transform[] patrolPoints;
     [SerializeField] float speed = 5f;
-    BlinkBehaviour blinkBehaviour;
-    Rigidbody2D rbody;
-    BoxCollider2D boxCollider;
-    SpriteRenderer spriteRenderer;
-    Vector2 moveTo;
     int pointsSize, currentPointIndex;
     bool isMovingForward = true, canMove = true, calledChangeIndex;
 
     void Start()
     {
-        rbody = GetComponent<Rigidbody2D>();
-        boxCollider = GetComponent<BoxCollider2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        blinkBehaviour = GetComponent<BlinkBehaviour>();
         pointsSize = patrolPoints.Length;
         transform.position = patrolPoints[currentPointIndex].position;
         if (pointsSize > 1) currentPointIndex++;
-  }
+    }
 
     void verifyFlip()
     {
         float actualX = transform.position.x;
         float patrolX = patrolPoints[currentPointIndex].position.x;
 
-        if (patrolX > actualX) spriteRenderer.flipX = true;
-        else if (patrolX < actualX) spriteRenderer.flipX = false;
+        if (patrolX > actualX) GetComponent<SpriteRenderer>().flipX = true;
+        else if (patrolX < actualX) GetComponent<SpriteRenderer>().flipX = false;
     }
 
     void verifyIndex()
@@ -58,8 +49,8 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if (canMove)
         {
-            Vector2 moveAmount = Vector2.MoveTowards(rbody.position, patrolPoints[currentPointIndex].position, speed * Time.fixedDeltaTime);
-            rbody.MovePosition(moveAmount);  
+            Vector2 moveAmount = Vector2.MoveTowards(GetComponent<Rigidbody2D>().position, patrolPoints[currentPointIndex].position, speed * Time.fixedDeltaTime);
+            GetComponent<Rigidbody2D>().MovePosition(moveAmount);  
         }
     }
 
@@ -88,21 +79,14 @@ public class EnemyBehaviour : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player") other.GetComponent<PlayerHealth>().processHit();
+        if (other.CompareTag("Player")) other.GetComponent<PlayerHealth>().ProcessHit();
     }
 
     public void GetHit()
     {
-        canMove = false;
-        blinkBehaviour.Blink(0.125f);
-        StartCoroutine(Die());
-    }
-
-    IEnumerator Die()
-    {
-        boxCollider.enabled = false;
-        yield return new WaitForSeconds(0.5f);
-        transform.Rotate(0, 0, 90);
+        GetComponent<BoxCollider2D>().enabled = false;
         enabled = false;
+        GetComponent<Animator>().SetBool("Blink", true);
+        GetComponent<Animator>().SetBool("Die", true);
     }
 }

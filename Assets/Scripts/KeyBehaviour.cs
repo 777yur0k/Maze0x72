@@ -7,13 +7,13 @@ public class KeyBehaviour : MonoBehaviour
     void Start()
     {
         locations = GetComponentsInChildren<Transform>();
-        int index = Random.Range(0, locations.Length);
+        var index = Random.Range(0, locations.Length);
         transform.position = locations[index].position;  
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             GameManager.instance.GotKey();
             gameObject.SetActive(false);
