@@ -8,7 +8,11 @@ public class SetPanels : MonoBehaviour
     string ActivePanel = "MainMenu", OldPanel;
     public GameObject Panel;
     public List<GameObject> Panels;
+    public List<GameObject> Levels;
     public GameObject Player;
+    string CurrentLevel;
+    GameObject CurrentLevelObject;
+
 
     public void SetPanel(string NewPanel)
     {
@@ -35,11 +39,13 @@ public class SetPanels : MonoBehaviour
         else ClosePanel();
     }
 
-    public GameObject GetPanel(string Name) => Panels[GetIDPanel(Name)];
+    public GameObject GetPanel(string Name) => GetObject(Name, Panels);
 
-    int GetIDPanel(string Name)
+    public GameObject GetObject(string Name, List<GameObject> list) => list[GetID(Name, list)];
+
+    int GetID(string Name, List<GameObject> list)
     {
-        for (var i = 0; i < Panels.Count; i++) if (Name == Panels[i].name) return i;
+        for (var i = 0; i < list.Count; i++) if (Name == list[i].name) return i;
 
         Debug.LogError("Error name of Panel");
         return -1;
@@ -55,8 +61,20 @@ public class SetPanels : MonoBehaviour
 
     public void PlayerSpawn()
     {
-        var player = Instantiate(Player, GetPanel(ActivePanel).transform.Find("PlayerSpawn"));
+        var player = Instantiate(Player, CurrentLevelObject.transform.Find("PlayerSpawn"));
+        GameData.Character = player.GetComponent<PlayerHealth>().Character;
         Camera.main.GetComponent<CameraMotor>().lookAt = player.transform;
         Camera.main.GetComponent<GameManager>().PlayerController = player.GetComponent<PlayerController>();
     }
+
+    public void LoadLevel(string Name)
+    {
+        CurrentLevel = Name;
+        CurrentLevelObject = Instantiate(GetObject(Name, Levels));
+        PlayerSpawn();
+    }
+
+    public void DestroyLevel() => Destroy(CurrentLevelObject);
+
+    public void ReLoadLevel() => LoadLevel(CurrentLevel);
 }

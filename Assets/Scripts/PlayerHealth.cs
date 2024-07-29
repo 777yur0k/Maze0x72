@@ -3,7 +3,7 @@ using MyLibrary;
 
 public class PlayerHealth : MonoBehaviour
 {
-    Character Character = new();
+    public Character Character = new();
     public PlayerController controller;
     public Weapon weaponController;
     public GameObject[] Hearts;
@@ -46,6 +46,7 @@ public class PlayerHealth : MonoBehaviour
     public void DieAnimation()
     {
         Camera.main.GetComponent<SetPanels>().SetPanel("Lose");
+        Camera.main.GetComponent<SetPanels>().DestroyLevel();
         damaged = false;
     }
 }

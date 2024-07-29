@@ -3,7 +3,6 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance { get; private set; }
-    public bool hasKey { get; private set; } = false;
     public static bool hasWon { get; private set; } = false;
     public PlayerController PlayerController;
 
@@ -20,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     public void GotKey()
     {
-        hasKey = true;
+        GameData.Character.Key = true;
         PlayerController.ShowKey();
     }
 
