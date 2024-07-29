@@ -33,10 +33,10 @@ public class PlayerHealth : MonoBehaviour
 
         if (Character.Health <= 0) GetComponent<Animator>().SetBool("Die", true);
 
-        else Invoke(nameof(ChaneColliderState), 0.5f);
+        else Invoke(nameof(ChangeColliderState), 0.5f);
     }
 
-    void ChaneColliderState()
+    void ChangeColliderState()
     {
         controller.enabled = true;
         weaponController.enabled = true;
