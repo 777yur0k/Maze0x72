@@ -15,7 +15,7 @@ public class EnemyBehaviour : MonoBehaviour
         if (pointsSize > 1) currentPointIndex++;
     }
 
-    void verifyFlip()
+    void VerifyFlip()
     {
         float actualX = transform.position.x;
         float patrolX = patrolPoints[currentPointIndex].position.x;
@@ -24,7 +24,7 @@ public class EnemyBehaviour : MonoBehaviour
         else if (patrolX < actualX) GetComponent<SpriteRenderer>().flipX = false;
     }
 
-    void verifyIndex()
+    void VerifyIndex()
     {
         if (transform.position == patrolPoints[currentPointIndex].position && !calledChangeIndex)
         {
@@ -36,16 +36,16 @@ public class EnemyBehaviour : MonoBehaviour
     IEnumerator changePointIndex()
     {
         yield return new WaitForSeconds(0.5f); 
-        changeIndex();
+        ChangeIndex();
     }
 
     void Update()
     {
-        verifyFlip();
-        verifyIndex();
+        VerifyFlip();
+        VerifyIndex();
     }
 
-    void calculateAndMove()
+    void CalculateAndMove()
     {
         if (canMove)
         {
@@ -54,9 +54,9 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
-    void FixedUpdate() => calculateAndMove();
+    void FixedUpdate() => CalculateAndMove();
 
-    void changeIndex()
+    void ChangeIndex()
     {
         if (isMovingForward && currentPointIndex + 1 < pointsSize) currentPointIndex++;
         
