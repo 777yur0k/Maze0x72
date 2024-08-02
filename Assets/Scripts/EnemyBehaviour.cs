@@ -86,7 +86,6 @@ public class EnemyBehaviour : MonoBehaviour
     {
         GetComponent<BoxCollider2D>().enabled = false;
         enabled = false;
-        GetComponent<Animator>().SetBool("Blink", true);
-        GetComponent<Animator>().SetBool("Die", true);
+        GetComponent<Animator>().SetTrigger("Blink");
     }
 }

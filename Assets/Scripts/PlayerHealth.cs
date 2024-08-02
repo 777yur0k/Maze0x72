@@ -20,7 +20,7 @@ public class PlayerHealth : MonoBehaviour
         if (damaged) return;
 
         damaged = true;
-        GetComponent<Animator>().SetBool("Blink", true);
+        GetComponent<Animator>().SetTrigger("Blink");
 
         if (Character.Health > 0)
         { 
@@ -31,7 +31,7 @@ public class PlayerHealth : MonoBehaviour
         controller.enabled = false;
         weaponController.enabled = false;
 
-        if (Character.Health <= 0) GetComponent<Animator>().SetBool("Die", true);
+        if (Character.Health <= 0) GetComponent<Animator>().SetTrigger("Die");
 
         else Invoke(nameof(ChangeColliderState), 0.5f);
     }
