@@ -2,7 +2,6 @@
 using System.Xml.Serialization;
 using System.IO;
 using System.Xml;
-using MyLibrary;
 using System;
 
 public class OptionsSerialiazation : MonoBehaviour

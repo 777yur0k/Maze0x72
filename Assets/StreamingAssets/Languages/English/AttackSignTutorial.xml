@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Serializable>
+	<Language>
+		<string>Left click or space to attack</string>
+    </Language>
+</Serializable>

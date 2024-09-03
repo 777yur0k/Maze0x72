@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class DialogueTrigger : MonoBehaviour
 {
-  [SerializeField] Dialogue dialogue;
+    Dialogue dialogue = new();
+
+    void Start() => dialogue.sentences = GetComponent<LanguageScript>().Language;
 
     public void TriggerDialogue() => FindFirstObjectByType<DialogueManager>().StartDialogue(dialogue);
 

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Serializable>
+	<Language>
+		<string>Сыграть снова</string>
+		<string>Главное меню</string>
+        <string>К сожалению ты проиграл :(\nПопробуй ещё!</string>
+		<string>Ура! Ты выиграл! :D\nПоиграй ещё!</string>
+    </Language>
+</Serializable>

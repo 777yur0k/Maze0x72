@@ -1,5 +1,4 @@
 using UnityEngine;
-using MyLibrary;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -45,7 +44,8 @@ public class PlayerHealth : MonoBehaviour
 
     public void DieAnimation()
     {
-        Camera.main.GetComponent<SetPanels>().SetPanel("Lose");
+        Camera.main.GetComponent<SetPanels>().SetPanel("EndGame");
+        Camera.main.GetComponent<SetPanels>().GetPanel("EndGame").GetComponent<EndGameController>().LoseGame();
         Camera.main.GetComponent<SetPanels>().DestroyLevel();
         damaged = false;
     }

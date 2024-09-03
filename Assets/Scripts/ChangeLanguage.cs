@@ -8,6 +8,7 @@ public class ChangeLanguage : MonoBehaviour
 
     public static void LanguageChanged()
     {
-        for(var i = 0; i < ChangeLanguageActions.Count; i++) ChangeLanguageActions[i].Invoke();
+        InitializeOnLoad.LanguageInitialize();
+        for (var i = 0; i < ChangeLanguageActions.Count; i++) ChangeLanguageActions[i].Invoke();
     }
 }

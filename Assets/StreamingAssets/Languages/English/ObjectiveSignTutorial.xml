@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Serializable>
+	<Language>
+        <string>Take the key to open the door, then exit through the door.</string>
+    </Language>
+</Serializable>

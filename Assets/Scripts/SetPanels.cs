@@ -13,7 +13,6 @@ public class SetPanels : MonoBehaviour
     string CurrentLevel;
     GameObject CurrentLevelObject;
 
-
     public void SetPanel(string NewPanel)
     {
         Panel.SetActive(true);
@@ -71,6 +70,7 @@ public class SetPanels : MonoBehaviour
     {
         CurrentLevel = Name;
         CurrentLevelObject = Instantiate(GetObject(Name, Levels));
+        InitializeOnLoad.LanguageInitialize();
         PlayerSpawn();
     }
 

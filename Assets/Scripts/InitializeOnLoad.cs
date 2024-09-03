@@ -18,6 +18,13 @@ public class InitializeOnLoad
             Camera.main.GetComponent<OptionsSerialiazation>().Save();
         }
 
+        LangMassive.Initialize();
+        LanguageInitialize();
+    }
+
+    public static void LanguageInitialize()
+    {
+        ChangeLanguage.ChangeLanguageActions.Clear();
         var lang = Resources.FindObjectsOfTypeAll(typeof(LanguageScript)).Cast<LanguageScript>();
         foreach (LanguageScript script in lang) script.Initialize();
     }

@@ -16,10 +16,7 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    void Update()
-    {
-        CalculateMove();
-    }
+    void Update() => CalculateMove();
 
     public void ShowKey() => Key.SetActive(true);
 

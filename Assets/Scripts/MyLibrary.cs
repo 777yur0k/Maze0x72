@@ -1,34 +1,46 @@
 using System.Xml;
+using UnityEngine;
 
-namespace MyLibrary
+public class MyObject
 {
-    public class MyObject
+    static XmlWriterSettings settings = new();
+    public static XmlWriterSettings Settings
     {
-        static XmlWriterSettings settings = new();
-        public static XmlWriterSettings Settings
+        get
         {
-            get
-            {
-                settings.Indent = true;
-                settings.OmitXmlDeclaration = true;
-                settings.NewLineOnAttributes = true;
+            settings.Indent = true;
+            settings.OmitXmlDeclaration = true;
+            settings.NewLineOnAttributes = true;
 
-                return settings;
-            }
-
-            set => settings = value;
+            return settings;
         }
+
+        set => settings = value;
     }
 
-        public class Character
-    {
-        public int Health = 3, MaxHealth = 3;
-        public bool Key;
-    }
+    public static void ChangeActive(GameObject obj) => obj.SetActive(!obj.activeSelf);
 
-    public class Options
+    public static void ChangeActive(GameObject[] Mobj)
     {
-        public string Language = "English";
-        public bool FirstStartGame = true;
+        for (var i = 0; i < Mobj.Length; i++) Mobj[i].SetActive(!Mobj[i].activeSelf);
     }
+}
+
+public class Character
+{
+    public int Health = 3, MaxHealth = 3;
+    public bool Key;
+}
+
+public class Options
+{
+    public string Language = "English";
+    public bool FirstStartGame = true;
+}
+
+[System.Serializable]
+public class Dialogue
+{
+    [TextArea(3, 10)]
+    public string[] sentences;
 }

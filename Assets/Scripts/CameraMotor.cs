@@ -17,6 +17,6 @@ public class CameraMotor : MonoBehaviour
 
     void LateUpdate()
     {
-        if(lookAt != null) transform.position = new Vector3(Mathf.Clamp(transform.position.x + getDelta(lookAt.position.x, transform.position.x, boundX), bottomBoundX, topBoundX), Mathf.Clamp(transform.position.y + getDelta(lookAt.position.y, transform.position.y, boundY), bottomBoundY, topBoundY), -10);
+        if(lookAt != null) transform.position = new(Mathf.Clamp(transform.position.x + getDelta(lookAt.position.x, transform.position.x, boundX), bottomBoundX, topBoundX), Mathf.Clamp(transform.position.y + getDelta(lookAt.position.y, transform.position.y, boundY), bottomBoundY, topBoundY), -10);
     }
 }

@@ -1,44 +1,26 @@
 ﻿using UnityEngine;
-using System.IO;
 using TMPro;
 
 public class LanguageScript : MonoBehaviour
 {
-    public class Serializable
-    {
-        public string[] Language = { };
-    }
-
     public TMP_Text[] Texts;
-    public Serializable Ser = new();
+    public string[] Language = { };
 
-    public void Initialize()
+    public async void LoadLanguage() => UpdateLanguage(await LangMassive.LoadingLanguage(name));
+
+    public async void Initialize()
     {
-        LoadingLanguage();
-        ChangeLanguage.ChangeLanguageActions.Add(LoadingLanguage);
+        LoadLanguage();
+        ChangeLanguage.ChangeLanguageActions.Add(LoadLanguage);
     }
 
-    public async void LoadingLanguage()
+    public void UpdateLanguage(string[] lang)
     {
-        var path = "";
-
-        if (File.Exists(Application.streamingAssetsPath  + "/" + "Languages/" + GameData.Options.Language + "/" + name + ".xml")) path = "Languages/" + GameData.Options.Language + "/" + name + ".xml";
-
-        else path = "Languages/English/" + name + ".xml";
-#if UNITY_STANDALONE
-        Ser = (Serializable)SerializationScript.ClassDeser(new(typeof(Serializable)), path);
-#else
-        Ser = (Serializable)SerializationScript.ClassDeser(new(typeof(Serializable)), await SerializationScript.ClassDeser(path));
-#endif
-        UpdateLanguage();
-    }
-
-    public void UpdateLanguage()
-    {
+        Language = lang;
         if (Texts.Length == 0) return;
 
         for (var i = 0; i < Texts.Length; i++)
-            try { Texts[i].text = Ser.Language[i]; }
+            try { Texts[i].text = lang[i]; }
 
             catch { Debug.LogError("Error setting UI string: " + name); }
     }
