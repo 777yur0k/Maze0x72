@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Serializable>
+	<Strings>
+		<UIStrings>
+			<Name>MainMenu</Name>
+			<Language>
+				<string>Start</string>
+				<string>Tutorial</string>
+				<string>Options</string>
+				<string>Credits</string>
+				<string>Exit</string>
+			</Language>
+		</UIStrings>
+		<UIStrings>
+			<Name>EndGame</Name>
+			<Language>
+				<string>Play Again</string>
+				<string>Main Menu</string>
+				<string>Unfortunately you Lose :(\nTry Again!</string>
+				<string>Yay! You Won! :D\nPlay Again!</string>
+			</Language>
+		</UIStrings>
+		<UIStrings>
+			<Name>ContinueButton</Name>
+			<Language>
+				<string>Continue</string>
+			</Language>
+		</UIStrings>
+		<UIStrings>
+			<Name>AttackSignTutorial</Name>
+			<Language>
+				<string>Left click or space to attack</string>
+			</Language>
+		</UIStrings>
+		<UIStrings>
+			<Name>MoveSignTutorial</Name>
+			<Language>
+				<string>WASD to move</string>
+			</Language>
+		</UIStrings>
+		<UIStrings>
+			<Name>ObjectiveSignTutorial</Name>
+			<Language>
+				<string>Take the key to open the door, then exit through the door</string>
+			</Language>
+		</UIStrings>
+	</Strings>
+</Serializable>

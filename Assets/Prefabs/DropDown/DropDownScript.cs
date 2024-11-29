@@ -7,22 +7,30 @@ using UnityEngine.UI;
 public class DropDownScript : MonoBehaviour
 {
     public Color DefaultColor = Color.white, SelectColor = Color.yellow;
-    public int CountIntems, id;
     public GameObject PrefabItem, Template;
     public RectTransform Parent;
-    public List<DropDownItem> ItemsScripts;
-    public List<GameObject> Items;
     public TMP_Text MainLable;
-    public UnityAction UnityAction;
+    int CountIntems, id;
+    List<DropDownItem> ItemsScripts = new();
+    List<GameObject> Items = new();
+    UnityAction<string> Action;
 
-    public void GenerateOptions(string[] options, string selected)
+    public void Initialize(List<string> options, string selected, UnityAction<string> action)
+    {
+        Action = action;
+        MainLable.text = selected;
+        GenerateOptions(options, selected);
+        ChangeSize(Template.GetComponent<RectTransform>());
+    }
+
+    void GenerateOptions(List<string> options, string selected)
     {
         for (var k = 0; k < Items.Count; k++) Destroy(Items[k]);
 
         Items.Clear();
         ItemsScripts.Clear();
 
-        CountIntems = options.Length;
+        CountIntems = options.Count;
 
         for (var i = 0; i < CountIntems; i++)
         {
@@ -32,16 +40,13 @@ public class DropDownScript : MonoBehaviour
             ItemsScripts[i].SetColor(DefaultColor);
             if (options[i] == selected) ItemsScripts[i].SetColor(SelectColor);
         }
-
-        ChangeSize(Template.GetComponent<RectTransform>());
     }
 
     void ChangeSize(RectTransform Objetc)
     {
         var rectPrefab = PrefabItem.GetComponent<RectTransform>().rect;
-        /*if (Objetc.sizeDelta.y < rectPrefab.height * CountIntems)*/
-        Objetc.sizeDelta = new(Objetc.sizeDelta.x, (rectPrefab.height * CountIntems) + Parent.GetComponent<VerticalLayoutGroup>().spacing * CountIntems / 2);
-        Objetc.localPosition = new(0, -72.5f, 0);
+        Objetc.sizeDelta = new(Objetc.sizeDelta.x, (rectPrefab.height * CountIntems) + Parent.GetComponent<VerticalLayoutGroup>().spacing * (CountIntems - 1));
+        Template.transform.localPosition = new(Template.transform.localPosition.x, -GetComponent<RectTransform>().rect.height / 2);
     }
 
     public void Select(int variable)
@@ -53,7 +58,7 @@ public class DropDownScript : MonoBehaviour
 
         ItemsScripts[id].SetColor(SelectColor);
         Interact();
-        UnityAction.Invoke();
+        Action.Invoke(ItemsScripts[id].Label.text);
     }
 
     public void Interact()

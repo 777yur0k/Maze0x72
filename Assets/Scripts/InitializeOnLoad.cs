@@ -4,8 +4,9 @@ using System.Linq;
 public class InitializeOnLoad
 {
     [RuntimeInitializeOnLoadMethod]
-    static async void Initialize()
+    static void Initialize()
     {
+        GraphLang.Initialize();
         Camera.main.GetComponent<OptionsSerialiazation>().Initialize();
 #if UNITY_ANDROID
         Application.targetFrameRate = (int)Screen.currentResolution.refreshRateRatio.value;
@@ -18,13 +19,11 @@ public class InitializeOnLoad
             Camera.main.GetComponent<OptionsSerialiazation>().Save();
         }
 
-        LangMassive.Initialize();
         LanguageInitialize();
     }
 
     public static void LanguageInitialize()
     {
-        ChangeLanguage.ChangeLanguageActions.Clear();
         var lang = Resources.FindObjectsOfTypeAll(typeof(LanguageScript)).Cast<LanguageScript>();
         foreach (LanguageScript script in lang) script.Initialize();
     }

@@ -6,13 +6,15 @@ public class LanguageScript : MonoBehaviour
     public TMP_Text[] Texts;
     public string[] Language = { };
 
-    public async void LoadLanguage() => UpdateLanguage(await LangMassive.LoadingLanguage(name));
+    public void LoadLanguage() => UpdateLanguage(GraphLang.GetLanguage(name));
 
-    public async void Initialize()
+    public void Initialize()
     {
         LoadLanguage();
-        ChangeLanguage.ChangeLanguageActions.Add(LoadLanguage);
+        GraphLang.ChangeLanguageActions.Add(LoadLanguage);
     }
+
+    public void UpdateLanguage() => UpdateLanguage(Language);
 
     public void UpdateLanguage(string[] lang)
     {

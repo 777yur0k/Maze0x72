@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Serializable>
-	<Language>
-		<string>Play Again</string>
-		<string>Main Menu</string>
-        <string>Unfortunately you Lose :(\nTry Again!</string>
-		<string>Yay! You Won! :D\nPlay Again!</string>
-    </Language>
-</Serializable>

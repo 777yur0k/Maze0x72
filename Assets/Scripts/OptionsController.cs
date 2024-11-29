@@ -1,21 +1,17 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
 
 public class OptionsController : MonoBehaviour
 {
     public DropDownScript ChangeLanguageDrop;
-    UnityAction Action;
 
-    async void OnEnable()
+    void OnEnable()
     {
-        ChangeLanguageDrop.GenerateOptions(LangMassive.Manifest.Languages, GameData.Options.Language);
-        ChangeLanguageDrop.UnityAction = SetLanguage;
-        ChangeLanguageDrop.MainLable.text = GameData.Options.Language;
+        ChangeLanguageDrop.Initialize(GraphLang.Languages, GameData.Options.Language, SetLanguage);
     }
 
-    public void SetLanguage()
+    public void SetLanguage(string NewLanguage)
     {
-        GameData.Options.Language = ChangeLanguageDrop.ItemsScripts[ChangeLanguageDrop.id].Label.text;
-        ChangeLanguage.LanguageChanged();
+        GameData.Options.Language = NewLanguage;
+        GraphLang.LanguageChanged();
     }
 }

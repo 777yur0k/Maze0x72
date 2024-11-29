@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Serializable>
+	<Strings>
+		<UIStrings>
+			<Name>MainMenu</Name>
+			<Language>
+				<string>Начать</string>
+				<string>Обучение</string>
+				<string>Настройки</string>
+				<string>Авторы</string>
+				<string>Выйти</string>
+			</Language>
+		</UIStrings>
+		<UIStrings>
+			<Name>EndGame</Name>
+			<Language>
+				<string>Сыграть снова</string>
+				<string>Главное меню</string>
+				<string>К сожалению ты проиграл :(\nПопробуй ещё!</string>
+				<string>Ура! Ты выиграл! :D\nПоиграй ещё!</string>
+			</Language>
+		</UIStrings>
+		<UIStrings>
+			<Name>ContinueButton</Name>
+			<Language>
+				<string>Продолжить</string>
+			</Language>
+		</UIStrings>
+		<UIStrings>
+			<Name>AttackSignTutorial</Name>
+			<Language>
+				<string>Левый клик или пробел для атаки</string>
+			</Language>
+		</UIStrings>
+		<UIStrings>
+			<Name>MoveSignTutorial</Name>
+			<Language>
+				<string>WASD для движения</string>
+			</Language>
+		</UIStrings>
+		<UIStrings>
+			<Name>ObjectiveSignTutorial</Name>
+			<Language>
+				<string>Возьмите ключ, чтобы открыть дверь, и тогда выйдите через неё</string>
+			</Language>
+		</UIStrings>
+	</Strings>
+</Serializable>
