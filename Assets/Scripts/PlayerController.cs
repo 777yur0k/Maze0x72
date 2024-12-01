@@ -2,23 +2,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    Rigidbody2D rbody;
-    SpriteRenderer spriteRenderer;
-    [SerializeField] float speed = 5f;
+    public float speed = 5f;
     Vector2 moveDelta;
-    public GameObject attack, sword;
-    [SerializeField] bool startFlipped;
-    public GameObject Key;
-
-    void Start()
-    {
-        rbody = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
 
     void Update() => CalculateMove();
-
-    public void ShowKey() => Key.SetActive(true);
 
     void CalculateMove()
     {
@@ -29,5 +16,5 @@ public class PlayerController : MonoBehaviour
         else if (moveDelta.x > 0) transform.localScale = new(-1, 1, 1);
     }
     
-    void FixedUpdate() => rbody.MovePosition(rbody.position + (moveDelta.normalized * speed * Time.fixedDeltaTime));
+    void FixedUpdate() => GetComponent<Rigidbody2D>().MovePosition(GetComponent<Rigidbody2D>().position + (speed * Time.fixedDeltaTime * moveDelta.normalized));
 }

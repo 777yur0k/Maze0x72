@@ -7,7 +7,8 @@ public class InitializeOnLoad
     static void Initialize()
     {
         GraphLang.Initialize();
-        Camera.main.GetComponent<OptionsSerialiazation>().Initialize();
+        Camera.main.GetComponent<CachingScript>().Initialize();
+        OptionsSerialiazation.Initialize();
 #if UNITY_ANDROID
         Application.targetFrameRate = (int)Screen.currentResolution.refreshRateRatio.value;
 #endif
@@ -16,7 +17,7 @@ public class InitializeOnLoad
         {
             GameData.Options.FirstStartGame = false;
             GameData.Options.Language = Application.systemLanguage.ToString();
-            Camera.main.GetComponent<OptionsSerialiazation>().Save();
+            OptionsSerialiazation.Save();
         }
 
         LanguageInitialize();

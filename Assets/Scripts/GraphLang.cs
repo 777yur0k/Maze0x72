@@ -32,7 +32,7 @@ public static class GraphLang
 
             catch
             {
-                TextReader stream = new StringReader(CachingScript.GraphCach.text);
+                TextReader stream = new StringReader(Camera.main.GetComponent<CachingScript>().GraphCache.text);
                 XmlSerializer serializer = new(typeof(GraphCompilation));
                 Graph = (GraphCompilation)serializer.Deserialize(stream);
             }

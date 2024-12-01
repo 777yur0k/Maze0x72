@@ -2,5 +2,7 @@ using UnityEngine;
 
 public class CachingScript : MonoBehaviour
 {
-    static public TextAsset GraphCach;
+    public TextAsset GraphCache;
+
+    public void Initialize() => GameData.Manager = GetComponent<GameManager>();
 }

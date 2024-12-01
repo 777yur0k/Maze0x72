@@ -2,20 +2,15 @@ using UnityEngine;
 
 public class KeyBehaviour : MonoBehaviour
 {
-    Transform[] locations;
+    public Transform[] KeyLocations;
 
-    void Start()
-    {
-        locations = GetComponentsInChildren<Transform>();
-        var index = Random.Range(0, locations.Length);
-        transform.position = locations[index].position;  
-    }
+    void Start() => transform.position = KeyLocations[Random.Range(0, KeyLocations.Length)].position;
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.instance.GotKey();
+            GameData.Manager.GotKey();
             gameObject.SetActive(false);
         }
     }

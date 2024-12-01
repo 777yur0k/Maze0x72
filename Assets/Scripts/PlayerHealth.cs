@@ -30,7 +30,11 @@ public class PlayerHealth : MonoBehaviour
         controller.enabled = false;
         weaponController.enabled = false;
 
-        if (Character.Health <= 0) GetComponent<Animator>().SetTrigger("Die");
+        if (Character.Health <= 0)
+        {
+            Camera.main.transform.SetParent(null);
+            GetComponent<Animator>().SetTrigger("Die");
+        } 
 
         else Invoke(nameof(ChangeColliderState), 0.5f);
     }
@@ -44,9 +48,9 @@ public class PlayerHealth : MonoBehaviour
 
     public void DieAnimation()
     {
-        Camera.main.GetComponent<SetPanels>().SetPanel("EndGame");
-        Camera.main.GetComponent<SetPanels>().GetPanel("EndGame").GetComponent<EndGameController>().LoseGame();
-        Camera.main.GetComponent<SetPanels>().DestroyLevel();
+        GameData.Manager.SetPanel("EndGame");
+        GameData.Manager.GetPanel("EndGame").GetComponent<EndGameController>().LoseGame();
+        GameData.Manager.DestroyLevel();
         damaged = false;
     }
 }

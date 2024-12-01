@@ -4,24 +4,24 @@ using System.IO;
 using System.Xml;
 using System;
 
-public class OptionsSerialiazation : MonoBehaviour
+public static class OptionsSerialiazation
 {
     public class Serializable
     {
         public Options Options;
     }
 
-    Serializable Ser = new();
-    string DocumentsPath;
+    static Serializable Ser = new();
+    static string DocumentsPath;
 
-    public void Initialize()
+    public static void Initialize()
     {
         PlayerPrefs.DeleteAll();
         DocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/Maze0x72/";
         Load();
     }
 
-    public void Load()
+    public static void Load()
     {
 #if UNITY_STANDALONE
         if (File.Exists(DocumentsPath + "Options.xml"))
@@ -47,7 +47,7 @@ public class OptionsSerialiazation : MonoBehaviour
 #endif
     }
 
-    public void Save()
+    public static void Save()
     {
         SyncData(true);
 #if UNITY_STANDALONE
@@ -72,7 +72,7 @@ public class OptionsSerialiazation : MonoBehaviour
 #endif
     }
 
-    void SyncData(bool command)
+    static void SyncData(bool command)
     {
         if (command) Ser.Options = GameData.Options;
 
