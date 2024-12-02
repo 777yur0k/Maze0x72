@@ -7,6 +7,25 @@ public class PlayerController : MonoBehaviour
 
     void Update() => CalculateMove();
 
+    void OnTriggerEnter2D(Collider2D trigger)
+    {
+        if (trigger.CompareTag("Key"))
+        {
+            GameData.Manager.GotKey();
+            trigger.gameObject.SetActive(false);
+        }
+
+        if (trigger.CompareTag("Potion"))
+        {
+            if (GameData.Character.Health < GameData.Character.MaxHealth)
+            {
+                GameData.Character.Health++;
+                trigger.gameObject.SetActive(false);
+                GetComponent<PlayerHealth>().HeartsUpdate();
+            }
+        }
+    }
+
     void CalculateMove()
     {
         moveDelta.x = Input.GetAxisRaw("Horizontal");

@@ -8,7 +8,7 @@ public class PlayerHealth : MonoBehaviour
     public GameObject[] Hearts;
     bool damaged;
 
-    void HeartsUpdate()
+    public void HeartsUpdate()
     {
         for (var i = 0; i < Hearts.Length; i++) Hearts[i].SetActive(false);
         for (var i = 0; i < Character.Health; i++) Hearts[i].SetActive(true);
