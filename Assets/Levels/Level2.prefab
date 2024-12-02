@@ -5566,6 +5566,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2509585482556861706}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8064318824723951356
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 315292006862997364}
+  m_Layer: 0
+  m_Name: Point (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &315292006862997364
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8064318824723951356}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.4, y: 0.56, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4193859305178948977}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8107479423219435062
 GameObject:
   m_ObjectHideFlags: 0
@@ -5693,6 +5724,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3500417500997221676}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &9078893467594662915
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3554538233959335156}
+  m_Layer: 0
+  m_Name: Point (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3554538233959335156
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9078893467594662915}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.86, y: 0.56, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4193859305178948977}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &793972259287285019
 PrefabInstance:
@@ -5973,6 +6035,10 @@ PrefabInstance:
       value: EnemyOrc (4)
       objectReference: {fileID: 0}
     - target: {fileID: 4964218732789870625, guid: bbbcfdf47b2903d4ebd7cf80049418ef, type: 3}
+      propertyPath: patrolPoints.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964218732789870625, guid: bbbcfdf47b2903d4ebd7cf80049418ef, type: 3}
       propertyPath: 'patrolPoints.Array.data[0]'
       value: 
       objectReference: {fileID: 3047156818688087371}
@@ -5980,6 +6046,14 @@ PrefabInstance:
       propertyPath: 'patrolPoints.Array.data[1]'
       value: 
       objectReference: {fileID: 198912126378609368}
+    - target: {fileID: 4964218732789870625, guid: bbbcfdf47b2903d4ebd7cf80049418ef, type: 3}
+      propertyPath: 'patrolPoints.Array.data[2]'
+      value: 
+      objectReference: {fileID: 3554538233959335156}
+    - target: {fileID: 4964218732789870625, guid: bbbcfdf47b2903d4ebd7cf80049418ef, type: 3}
+      propertyPath: 'patrolPoints.Array.data[3]'
+      value: 
+      objectReference: {fileID: 315292006862997364}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -5989,6 +6063,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2969647048959782197, guid: bbbcfdf47b2903d4ebd7cf80049418ef, type: 3}
       insertIndex: -1
       addedObject: {fileID: 198912126378609368}
+    - targetCorrespondingSourceObject: {fileID: 2969647048959782197, guid: bbbcfdf47b2903d4ebd7cf80049418ef, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3554538233959335156}
+    - targetCorrespondingSourceObject: {fileID: 2969647048959782197, guid: bbbcfdf47b2903d4ebd7cf80049418ef, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 315292006862997364}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbbcfdf47b2903d4ebd7cf80049418ef, type: 3}
 --- !u!4 &4193859305178948977 stripped
