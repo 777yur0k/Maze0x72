@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
-    [SerializeField] Transform[] patrolPoints;
-    [SerializeField] float speed = 5f;
+    public Transform[] patrolPoints;
+    float speed = 5f;
     int pointsSize, currentPointIndex;
     bool isMovingForward = true, canMove = true, calledChangeIndex;
 
@@ -29,11 +29,11 @@ public class EnemyBehaviour : MonoBehaviour
         if (transform.position == patrolPoints[currentPointIndex].position && !calledChangeIndex)
         {
             calledChangeIndex = true;
-            StartCoroutine(changePointIndex());
+            StartCoroutine(ChangePointIndex());
         }
     }
 
-    IEnumerator changePointIndex()
+    IEnumerator ChangePointIndex()
     {
         yield return new WaitForSeconds(0.5f); 
         ChangeIndex();
@@ -77,9 +77,9 @@ public class EnemyBehaviour : MonoBehaviour
         calledChangeIndex = false;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D trigger)
     {
-        if (other.CompareTag("Player")) other.GetComponent<PlayerHealth>().ProcessHit();
+        if (trigger.CompareTag("Player")) trigger.GetComponent<PlayerController>().ProcessHit();
     }
 
     public void GetHit()

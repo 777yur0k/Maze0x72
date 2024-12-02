@@ -10,6 +10,14 @@ public class GameManager : MonoBehaviour
     public List<GameObject> Panels, Levels;
     int CurrentLevelID;
     GameObject CurrentLevelObject;
+    public GameObject HeartsPanel;
+    public GameObject[] Hearts;
+
+    public void HeartsUpdate()
+    {
+        for (var i = 0; i < Hearts.Length; i++) Hearts[i].SetActive(false);
+        for (var i = 0; i < GameData.Character.Health; i++) Hearts[i].SetActive(true);
+    }
 
     public void SetPanel(string NewPanel)
     {
@@ -61,7 +69,7 @@ public class GameManager : MonoBehaviour
         var player = Instantiate(Player, CurrentLevelObject.transform.Find("PlayerSpawn"));
         Camera.main.transform.SetParent(player.transform);
         Camera.main.transform.localPosition = new(0,0,-1);
-        GameData.Character = player.GetComponent<PlayerHealth>().Character;
+        GameData.Character = player.GetComponent<PlayerController>().Character;
     }
 
     public void GotKey()
@@ -78,12 +86,15 @@ public class GameManager : MonoBehaviour
         CurrentLevelObject = Instantiate(GetObject(Name, Levels));
         InitializeOnLoad.LanguageInitialize();
         PlayerSpawn();
+        HeartsPanel.SetActive(true);
+        HeartsUpdate();
     }
 
     public void DestroyLevel()
     {
         Camera.main.transform.SetParent(null);
         Key.SetActive(false);
+        HeartsPanel.SetActive(false);
         Destroy(CurrentLevelObject);
     }
 
