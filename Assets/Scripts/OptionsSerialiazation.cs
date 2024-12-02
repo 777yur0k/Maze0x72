@@ -26,7 +26,10 @@ public static class OptionsSerialiazation
 #if UNITY_STANDALONE
         if (File.Exists(DocumentsPath + "Options.xml"))
         {
-            Ser = (Serializable)new XmlSerializer(typeof(Serializable)).Deserialize(new FileStream(DocumentsPath + "Options.xml", FileMode.Open, FileAccess.Read));
+            using (FileStream stream = new(DocumentsPath + "Options.xml", FileMode.Open, FileAccess.Read))
+            {
+                Ser = (Serializable)new XmlSerializer(typeof(Serializable)).Deserialize(stream);
+            }
             SyncData(false);
         }
 #elif UNITY_ANDROID
@@ -52,12 +55,14 @@ public static class OptionsSerialiazation
         SyncData(true);
 #if UNITY_STANDALONE
         if (!Directory.Exists(DocumentsPath)) Directory.CreateDirectory(DocumentsPath);
+        if (File.Exists(DocumentsPath + "Options.xml")) File.Delete(DocumentsPath + "Options.xml");
 
         using (FileStream stream = new(DocumentsPath + "Options.xml", FileMode.Create, FileAccess.Write))
         {
             new XmlSerializer(typeof(Serializable)).Serialize(XmlWriter.Create(stream, MyObject.Settings), Ser);
         }
 #elif UNITY_ANDROID
+        if (File.Exists(Path.Combine(Application.persistentDataPath, "Options.xml"))) File.Delete(Path.Combine(Application.persistentDataPath, "Options.xml"));
         using (FileStream stream = new(Path.Combine(Application.persistentDataPath, "Options.xml"), FileMode.Create, FileAccess.Write))
         {
             new XmlSerializer(typeof(Serializable)).Serialize(XmlWriter.Create(stream, MyObject.Settings), Ser);

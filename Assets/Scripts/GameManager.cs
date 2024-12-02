@@ -116,4 +116,6 @@ public class GameManager : MonoBehaviour
 
         return -1;
     }
+
+    public void Quit() => Application.Quit();
 }

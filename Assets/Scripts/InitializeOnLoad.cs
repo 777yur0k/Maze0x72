@@ -9,6 +9,7 @@ public class InitializeOnLoad
         GraphLang.Initialize();
         Camera.main.GetComponent<CachingScript>().Initialize();
         OptionsSerialiazation.Initialize();
+        Camera.main.GetComponent<AudioSource>().volume = GameData.Options.MusicVolume / 100;
 #if UNITY_ANDROID
         Application.targetFrameRate = (int)Screen.currentResolution.refreshRateRatio.value;
 #endif

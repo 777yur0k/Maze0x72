@@ -40,6 +40,7 @@ public class Character
 public class Options
 {
     public string Language = "English";
+    public float MusicVolume = 100;
     public bool FirstStartGame = true;
 }
 
