@@ -19,7 +19,6 @@ public static class GraphLang
     {
             try
             {
-#if UNITY_STANDALONE
                 if (!File.Exists(Application.streamingAssetsPath + "/Graph.xml"))
                 {
                     GraphGeneration.Initialize();
@@ -27,7 +26,6 @@ public static class GraphLang
                 }
                 else
                     Graph = (GraphCompilation)SerializationScript.ClassDeser(new(typeof(GraphCompilation)), "Graph.xml");
-#endif
             }
 
             catch
