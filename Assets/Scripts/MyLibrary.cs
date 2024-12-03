@@ -4,7 +4,6 @@ using System;
 using System.Xml;
 using System.Xml.Serialization;
 using UnityEngine;
-using System.Linq;
 
 public class MyObject
 {
@@ -40,7 +39,7 @@ public class Character
 public class Options
 {
     public string Language = "English";
-    public float MusicVolume = 100;
+    public float MusicVolume = 50;
     public bool FirstStartGame = true;
 }
 
