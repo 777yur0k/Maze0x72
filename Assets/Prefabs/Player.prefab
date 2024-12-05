@@ -286,7 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52faf1082f256da468601c034c0c5cbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 9.5
+  speed: 9.4
   weaponController: {fileID: 8917574056305601770}
 --- !u!212 &8917574056738172677
 SpriteRenderer:
