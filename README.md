@@ -6,6 +6,7 @@ This is a remake of the original Maze0x72. The game is very simple, the idea is 
 Это ремейк оригинальной игры Maze0x72. Игра очень простая, идея в том, что нужно найти ключ, открывающий дверь, исследовав лабиринт. В игре есть несколько мест, где может появиться ключ. Когда вы получили ключ, просто отправляйтесь к двери на выход.
 
 [Play on Itch](https://777yur0k.itch.io/remaze0x72)
+
 [Play on GameJolt](https://gamejolt.com/games/remaze0x72/951338)
 
 ![Game Screen](Images/print.png "Game Screen")
