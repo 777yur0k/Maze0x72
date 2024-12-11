@@ -7,6 +7,8 @@ This is a remake of the original Maze0x72. The game is very simple, the idea is 
 
 [Play on Itch](https://777yur0k.itch.io/remaze0x72)
 
+[Play on GameJolt](https://gamejolt.com/games/remaze0x72/951338)
+
 ![Game Screen](Images/print.png "Game Screen")
 
 ![Game Play](Images/gameplay.gif "Game Play")
