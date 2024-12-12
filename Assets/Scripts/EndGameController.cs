@@ -7,10 +7,5 @@ public class EndGameController : MonoBehaviour
 
     public void LoseGame() => Text.text = GetComponent<LanguageScript>().Language[2];
 
-    public void WinGame()
-    {
-        var s = GetComponent<LanguageScript>();
-
-        Text.text = GetComponent<LanguageScript>().Language[3];
-    }
+    public void WinGame() => Text.text = GetComponent<LanguageScript>().Language[3];
 }
